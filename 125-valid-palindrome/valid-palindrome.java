@@ -1,20 +1,22 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        ArrayList<Character> arr=new ArrayList<>();
-        for(int i=0;i<s.length();i++){
-            if(((int)s.charAt(i)>64 &&(int)s.charAt(i)<91) || ((int)s.charAt(i)>96 &&(int)s.charAt(i)<123)){
-                char a=Character.toLowerCase(s.charAt(i));
-                arr.add(a);
+        int left = 0, right = s.length() - 1;
+        while (left < right) {
+            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+                left++;
             }
-            else if((int)s.charAt(i)>47 && (int)s.charAt(i)<58) arr.add(s.charAt(i));
+            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+                right--;
+            }
+            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+                return false;
+            }
+            left++;
+            right--;
         }
-        ArrayList<Character> arr1=new ArrayList<>(arr);
-        Collections.reverse(arr);
-        System.out.println(arr);
-         System.out.println(arr1);
+        return true;
 
-        if(arr.equals(arr1)) return true;
-        return false;
+
         
     }
 }
